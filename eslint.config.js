@@ -1,25 +1,40 @@
 import js from "@eslint/js";
 import globals from "globals";
 import react from "eslint-plugin-react";
-import js from "@eslint/js";
-import globals from "globals";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
 
 export default [
   js.configs.recommended,
-  reactHooks.configs.flat.recommended,
-  reactRefresh.configs.vite,
+
   {
     files: ["**/*.{js,jsx}"],
+
     languageOptions: {
-      globals: globals.browser,
+      ecmaVersion: "latest",
       sourceType: "module",
-      parserOptions: { ecmaFeatures: { jsx: true } },
+
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+
+      globals: globals.browser,
     },
+
     plugins: {
       react,
     },
-    rules: {},
+
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+
+    rules: {
+      "no-unused-vars": "off",
+      "react/jsx-uses-react": "error",
+      "react/jsx-uses-vars": "error",
+    },
   },
 ];
