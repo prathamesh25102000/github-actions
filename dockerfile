@@ -1,6 +1,21 @@
-FROM node-20-alpine
+# FROM node-20-alpine
+# WORKDIR /app
+# COPY package*.json ./
+# RUN npm ci --ommit=dev
+# COPY . .
+# CMD ["node", "src/index.js"]
+
+
+FROM node:20-alpine
+
 WORKDIR /app
+
 COPY package*.json ./
-RUN npm ci --ommit=dev
+
+RUN npm install
+
 COPY . .
-CMD ["node", "src/index.js"]
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
